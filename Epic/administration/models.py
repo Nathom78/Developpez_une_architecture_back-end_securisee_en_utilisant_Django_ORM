@@ -51,36 +51,32 @@ class MyCustomManager(BaseUserManager):
 
 
 class MyUser(AbstractBaseUser, PermissionsMixin):
+    class RoleChoice(models.TextChoices):
+        ADMINISTRATOR = 'administrator', _('administrator')
+        SALER = 'commercial', _('commercial')
+        SUPPORT = 'support', _('support')
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    username = models.CharField(max_length=40, unique=True)
-
-    ADMINISTRATOR = 'Gestion'
-    SALER = 'Vente'
-    SUPPORT = 'Support'
-    TEAM_CHOICES = [
-        (ADMINISTRATOR, 'Equipe gestion'),
-        (SALER, 'Equipe vente'),
-        (SUPPORT, 'Equipe support'),
-    ]
+    username = models.CharField(max_length=40, unique=True, verbose_name=_('username'))
 
     email = models.EmailField(
-        verbose_name='email address',
+        verbose_name=_('email address'),
         max_length=255,
         unique=True,
         null=True,
         blank=True,
     )
 
-    role = models.CharField(max_length=30, choices=TEAM_CHOICES, blank=False, verbose_name='Equipe')
+    role = models.CharField(max_length=30, choices=RoleChoice.choices, blank=False, verbose_name=_('team'))
     is_active = models.BooleanField(default=True)
 
     is_admin = models.BooleanField(default=False)
 
     REQUIRED_FIELDS = ['email']
 
-    USERNAME_FIELD = 'Username'
-    EMAIL_FIELD = 'Email'
+    USERNAME_FIELD = 'username'
+    EMAIL_FIELD = 'email'
 
     objects = MyCustomManager()
 
@@ -99,18 +95,18 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
 
-        if self.role == self.ADMINISTRATOR:
+        if self.role == self.RoleChoice.ADMINISTRATOR:
             self.is_admin = True
             super().save(*args, **kwargs)
-            group = Group.objects.get(name='Gestionnaire')
+            group = Group.objects.get(name='Administrator')
             group.user_set.add(self)
 
-        elif self.role == self.SALER:
+        elif self.role == self.RoleChoice.SALER:
             super().save(*args, **kwargs)
             group = Group.objects.get(name='Commercial')
             group.user_set.add(self)
 
-        elif self.role == self.SUPPORT:
+        elif self.role == self.RoleChoice.SUPPORT:
             super().save(*args, **kwargs)
             group = Group.objects.get(name='Support')
             group.user_set.add(self)

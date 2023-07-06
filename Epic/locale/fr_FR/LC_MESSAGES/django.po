@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-05 16:50+0200\n"
+"PO-Revision-Date: 2023-07-05 16:59+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: .\Epic\administration\forms.py:17
+msgid "Password"
+msgstr "Mot de passe"
+
+#: .\Epic\administration\forms.py:22
+msgid "Password confirmation"
+msgstr "Confirmation du mot de passe"
+
+#: .\Epic\administration\forms.py:24
+msgid "Enter the same password as before, for verification."
+msgstr "Entrez le même mot de passe que précédemment, pour vérification."
+
+#: .\Epic\administration\forms.py:35 .\Epic\administration\forms.py:100
+msgid "The username ‘{}’ is already in use."
+msgstr "Le nom d'utilisateur '{}' est déjà utilisé."
+
+#: .\Epic\administration\forms.py:42 .\Epic\administration\forms.py:107
+msgid "The email ‘{}’ is already in use."
+msgstr "L'email '{}' est déjà utilisé."
+
+#: .\Epic\administration\forms.py:50
+msgid "Passwords don't match"
+msgstr "Les mots de passe ne correspondent pas"
+
+#: .\Epic\administration\models.py:20
+msgid "Users must have an username"
+msgstr "Les utilisateurs doivent avoir un nom d'utilisateur"
+
+#: .\Epic\administration\models.py:55
+msgid "administrator"
+msgstr "administrateur"
+
+#: .\Epic\administration\models.py:56
+msgid "commercial"
+msgstr "commercial"
+
+#: .\Epic\administration\models.py:57
+msgid "support"
+msgstr "support"
+
+#: .\Epic\administration\models.py:61
+msgid "username"
+msgstr "nom d'utilisateur"
+
+#: .\Epic\administration\models.py:64 .\Epic\crm\models.py:15
+msgid "email address"
+msgstr "adresse e-mail"
+
+#: .\Epic\administration\models.py:71
+msgid "team"
+msgstr "équipe"
+
+#: .\Epic\administration\validators.py:9
+msgid "Password must contain a letter."
+msgstr "Le mot de passe doit contenir une lettre."
+
+#: .\Epic\administration\validators.py:13
+msgid "Your password must contain at least one uppercase or lowercase letter."
+msgstr "Votre mot de passe doit contenir au moins une lettre majuscule ou minuscule."
+
+#: .\Epic\administration\validators.py:20
+msgid "The password must contain a number"
+msgstr "Le mot de passe doit contenir un chiffre"
+
+#: .\Epic\administration\validators.py:25
+msgid "Your password must contain at least one number."
+msgstr "Votre mot de passe doit contenir au moins un chiffre."
+
+#: .\Epic\crm\models.py:12
+msgid "first name"
+msgstr "prénom"
+
+#: .\Epic\crm\models.py:13
+msgid "last name"
+msgstr "nom"
+
+#: .\Epic\crm\models.py:21
+msgid "phone"
+msgstr "téléphone"
+
+#: .\Epic\crm\models.py:23
+msgid "company name"
+msgstr "nom de l’entreprise"
+
+#: .\Epic\crm\models.py:24 .\Epic\crm\models.py:48 .\Epic\crm\models.py:66
+msgid "date created"
+msgstr "date de création"
+
+#: .\Epic\crm\models.py:25 .\Epic\crm\models.py:49 .\Epic\crm\models.py:67
+msgid "date updated"
+msgstr "date de mise à jour"
+
+#: .\Epic\crm\models.py:30 .\Epic\crm\models.py:42
+msgid "sales contact"
+msgstr "contact commercial"
+
+#: .\Epic\crm\models.py:44
+msgid "status"
+msgstr "statut"
+
+#: .\Epic\crm\models.py:45 .\Epic\crm\models.py:61
+msgid "client"
+msgstr "client"
+
+#: .\Epic\crm\models.py:46
+msgid "amount"
+msgstr "montant"
+
+#: .\Epic\crm\models.py:47
+msgid "payment due"
+msgstr "paiement dû"
+
+#: .\Epic\crm\models.py:57
+msgid "support contact"
+msgstr "contact d'assistance"
+
+#: .\Epic\crm\models.py:59
+msgid "contract"
+msgstr "contrat"
+
+#: .\Epic\crm\models.py:62
+msgid "attendees"
+msgstr "participants"
+
+#: .\Epic\crm\models.py:63
+msgid "location"
+msgstr "lieu"
+
+#: .\Epic\crm\models.py:64
+msgid "note"
+msgstr "note"
+
+#: .\Epic\crm\models.py:65
+msgid "event date"
+msgstr "date de l'événement"

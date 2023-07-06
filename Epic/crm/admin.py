@@ -1,14 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
-
-# from crm.models import (
-#     Contributors,
-#     Projects,
-#     Issues,
-#     Comments,
-#     Users
-# )
+from crm.models import (
+    Contract,
+    Event,
+    Client
+)
 
 
 # class ContributorsAdmin(admin.ModelAdmin):
@@ -27,7 +23,7 @@ from django.contrib import admin
 #     readonly_fields = ('id',)
 
 # And all models for personalized
-# admin.site.register(Contributors, ContributorsAdmin)
-# admin.site.register(Projects, ProjectsAdmin)
-# admin.site.register(Issues, IssuesAdmin)
-# admin.site.register(Comments)
+admin.site.register(Client)
+admin.site.register(Event)
+admin.site.register(Contract)
+
