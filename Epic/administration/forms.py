@@ -74,13 +74,13 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
             if user.role == user.ADMINISTRATOR:
-                group = Group.objects.get(name='Gestionnaire')
+                group = Group.objects.get(name='administrator')
                 user.groups.add(group)
             elif user.role == user.SALER:
-                group = Group.objects.get(name='Commercial')
+                group = Group.objects.get(name='commercial')
                 user.groups.add(group)
             elif user.role == user.SUPPORT:
-                group = Group.objects.get(name='Support')
+                group = Group.objects.get(name='support')
                 user.groups.add(group)
 
         return user
@@ -88,8 +88,7 @@ class UserCreationForm(forms.ModelForm):
 
 class UserChangeForm(forms.ModelForm):
     """A form for updating users. Includes all the fields on
-    the user, but replaces the password field with admin's
-    disabled password hash display field.
+    the user, but replaces the password field disabled password hash display field.
     """
     password = ReadOnlyPasswordHashField()
 
@@ -109,4 +108,4 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('username', 'role', 'email', 'password', 'is_active', 'is_admin')
+        fields = ('username', 'role', 'email', 'password', 'is_active')

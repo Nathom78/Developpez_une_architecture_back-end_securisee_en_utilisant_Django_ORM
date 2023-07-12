@@ -1,4 +1,5 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib import admin
 from django.contrib.auth.models import Group, PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -39,7 +40,7 @@ class MyCustomManager(BaseUserManager):
         user = self.create_user(
             username=username,
             email=email,
-            role='ADMINISTRATOR',
+            role='administrator',
             password=password,
             **extra_fields
         )
@@ -71,8 +72,6 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     role = models.CharField(max_length=30, choices=RoleChoice.choices, blank=False, verbose_name=_('team'))
     is_active = models.BooleanField(default=True)
 
-    is_admin = models.BooleanField(default=False)
-
     REQUIRED_FIELDS = ['email']
 
     USERNAME_FIELD = 'username'
@@ -93,29 +92,26 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         # Simplest possible answer: Yes, always
         return True
 
-    def save(self, *args, **kwargs):
-
-        if self.role == self.RoleChoice.ADMINISTRATOR:
-            self.is_admin = True
-            super().save(*args, **kwargs)
-            group = Group.objects.get(name='Administrator')
-            group.user_set.add(self)
-
-        elif self.role == self.RoleChoice.SALER:
-            super().save(*args, **kwargs)
-            group = Group.objects.get(name='Commercial')
-            group.user_set.add(self)
-
-        elif self.role == self.RoleChoice.SUPPORT:
-            super().save(*args, **kwargs)
-            group = Group.objects.get(name='Support')
-            group.user_set.add(self)
+    # def save(self, *args, **kwargs):
+    #
+    #     if self.role == self.RoleChoice.ADMINISTRATOR:
+    #         self.is_admin = True
+    #         super().save(*args, **kwargs)
+    #         group = Group.objects.get(name='administrator')
+    #         group.user_set.add(self)
+    #
+    #     elif self.role == self.RoleChoice.SALER:
+    #         super().save(*args, **kwargs)
+    #         group = Group.objects.get(name='commercial')
+    #         group.user_set.add(self)
+    #
+    #     elif self.role == self.RoleChoice.SUPPORT:
+    #         super().save(*args, **kwargs)
+    #         group = Group.objects.get(name='support')
+    #         group.user_set.add(self)
 
     @property
+    @admin.display()
     def is_staff(self):
         """All active users have access to the admin site"""
-        if self.is_admin:
-            # Simplest possible answer: All admins are staff
-            return self.is_admin
-        else:
-            return self.is_active
+        return self.is_active
