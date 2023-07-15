@@ -19,7 +19,6 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path(
         "admin/password_reset/",
         auth_views.PasswordResetView.as_view(),
@@ -40,6 +39,7 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
+    path("admin/", admin.site.urls, name="admin"),
 ]
 
 

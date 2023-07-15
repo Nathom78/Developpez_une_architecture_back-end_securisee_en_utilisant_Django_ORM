@@ -45,7 +45,6 @@ class MyCustomManager(BaseUserManager):
             **extra_fields
         )
 
-        user.is_admin = True
         user.is_superuser = True
         user.save(using=self._db)
         return user
@@ -61,13 +60,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(max_length=40, unique=True, verbose_name=_('username'))
 
-    email = models.EmailField(
-        verbose_name=_('email address'),
-        max_length=255,
-        unique=True,
-        null=True,
-        blank=True,
-    )
+    email = models.EmailField(verbose_name=_('email address'), max_length=255, unique=True, null=True, blank=True)
 
     role = models.CharField(max_length=30, choices=RoleChoice.choices, blank=False, verbose_name=_('team'))
     is_active = models.BooleanField(default=True)
@@ -92,23 +85,22 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         # Simplest possible answer: Yes, always
         return True
 
-    # def save(self, *args, **kwargs):
-    #
-    #     if self.role == self.RoleChoice.ADMINISTRATOR:
-    #         self.is_admin = True
-    #         super().save(*args, **kwargs)
-    #         group = Group.objects.get(name='administrator')
-    #         group.user_set.add(self)
-    #
-    #     elif self.role == self.RoleChoice.SALER:
-    #         super().save(*args, **kwargs)
-    #         group = Group.objects.get(name='commercial')
-    #         group.user_set.add(self)
-    #
-    #     elif self.role == self.RoleChoice.SUPPORT:
-    #         super().save(*args, **kwargs)
-    #         group = Group.objects.get(name='support')
-    #         group.user_set.add(self)
+    def save(self, *args, **kwargs):
+
+        if self.role == self.RoleChoice.ADMINISTRATOR:
+            super().save(*args, **kwargs)
+            group = Group.objects.get(name='administrator')
+            self.groups.set([group], clear=True)
+
+        elif self.role == self.RoleChoice.SALER:
+            super().save(*args, **kwargs)
+            group = Group.objects.get(name='commercial')
+            self.groups.set([group], clear=True)
+
+        elif self.role == self.RoleChoice.SUPPORT:
+            super().save(*args, **kwargs)
+            group = Group.objects.get(name='support')
+            self.groups.set([group], clear=True)
 
     @property
     @admin.display()

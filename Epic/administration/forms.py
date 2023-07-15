@@ -2,7 +2,6 @@
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password, password_validators_help_text_html
 from django import forms
@@ -70,19 +69,6 @@ class UserCreationForm(forms.ModelForm):
         user = super().save(commit=False)
         password = self.cleaned_data["password1"]
         user.set_password(password)
-
-        if commit:
-            user.save()
-            if user.role == user.ADMINISTRATOR:
-                group = Group.objects.get(name='administrator')
-                user.groups.add(group)
-            elif user.role == user.SALER:
-                group = Group.objects.get(name='commercial')
-                user.groups.add(group)
-            elif user.role == user.SUPPORT:
-                group = Group.objects.get(name='support')
-                user.groups.add(group)
-
         return user
 
 

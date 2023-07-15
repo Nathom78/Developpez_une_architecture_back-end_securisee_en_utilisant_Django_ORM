@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'rest_framework_simplejwt', to use localizations/translations
+    'rest_framework_simplejwt',  # to use localizations/translations
     'drf_spectacular',
     'administration',
     'crm'
@@ -91,16 +91,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTIONS': {
-            'min_length': 8
-        }
-    },
-    {
         'NAME': 'administration.validators.ContainsLetterValidator',
     },
     {
         'NAME': 'administration.validators.ContainsNumberValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -113,9 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'fr-FR'
+LANGUAGE_CODE = 'fr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
 
@@ -136,6 +136,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'administration.MyUser'
+
+LOGIN_URL = '/admin/'
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',

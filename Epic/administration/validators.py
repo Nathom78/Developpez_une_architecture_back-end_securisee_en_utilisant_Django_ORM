@@ -10,7 +10,7 @@ class ContainsLetterValidator:
                 code="password_no_letters")
 
     def get_help_text(self):
-        return _("Your password must contain at least one uppercase or lowercase letter.")
+        return _("Your password must contain at least one letter.")
 
 
 class ContainsNumberValidator:
