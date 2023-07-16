@@ -17,6 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+# from swagger.views import (
+#     DecoratedTokenVerifyView,
+#     DecoratedTokenRefreshView,
+#     DecoratedTokenObtainPairView,
+#     DecoratedTokenBlacklistView
+# )
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+    TokenBlacklistView
+)
 
 urlpatterns = [
     path(
@@ -40,6 +53,21 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     path("admin/", admin.site.urls, name="admin"),
+    # YOUR PATTERNS
+    path('crm/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('crm/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('crm/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    # EndPoints for Login and SignUp
+    path('login', TokenObtainPairView.as_view(), name='login'),
+    # # simplejwt urls and views for the Swagger
+    # path('crm/token/', DecoratedTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('crm/token/refresh/', DecoratedTokenRefreshView.as_view(), name='token_refresh'),
+    # path('crm/token/verify/', DecoratedTokenVerifyView.as_view(), name='token_verify'),
+    # path('crm/token/black_list/', DecoratedTokenBlacklistView.as_view(), name='token_black_list'),
+    # simplejwt urls and views for the Swagger
+    path('crm/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('crm/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('crm/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('crm/token/black_list/', TokenBlacklistView.as_view(), name='token_black_list'),
 ]
-
-

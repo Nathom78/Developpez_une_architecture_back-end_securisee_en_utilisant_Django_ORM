@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_simplejwt',  # to use localizations/translations
+    # 'rest_framework_simplejwt',  # to use localizations/translations
     'drf_spectacular',
     'administration',
     'crm'
@@ -137,7 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'administration.MyUser'
 
-LOGIN_URL = '/admin/'
+LOGIN_URL = 'login'
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"

@@ -62,7 +62,7 @@ class Contract(models.Model):
 
 class Event(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    support_user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.PROTECT,
+    support_user = models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.PROTECT,
                                      verbose_name=_("support contact"))
     contract = models.ForeignKey(to=Contract, on_delete=models.CASCADE, verbose_name=_("contract"))
     event_status = models.BooleanField(default=True, verbose_name=_("status"))
