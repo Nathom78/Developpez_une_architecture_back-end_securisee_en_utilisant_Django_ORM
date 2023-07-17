@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'rest_framework_simplejwt',  # to use localizations/translations
+    'rest_framework_simplejwt',  # to use localizations/translations
     'drf_spectacular',
     'administration',
     'crm'
@@ -123,7 +125,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOCALE_PATHS = [BASE_DIR.joinpath('/Epic/locale')]
+
+LOCALE_PATHS = [BASE_DIR.joinpath('locale')]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -169,3 +172,22 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
 }
+
+sentry_sdk.init(
+    # dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
+    dsn="https://1d25966b8db34f9badcc76237a3a52c9@o4505539706814464.ingest.sentry.io/4505539709435904",
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production,
+    traces_sample_rate=1.0,
+    integrations=[
+        DjangoIntegration(
+            transaction_style='url',
+            middleware_spans=True,
+            signals_spans=False,
+            cache_spans=False,
+        ),
+    ],
+    send_default_pii=True
+)

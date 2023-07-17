@@ -104,7 +104,7 @@ msgstr "nom"
 
 #: .\crm\models.py:19
 msgid "office phone"
-msgstr "bisous"
+msgstr "téléphone du bureau"
 
 #: .\crm\models.py:20
 msgid "mobile"

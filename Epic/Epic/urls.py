@@ -31,6 +31,11 @@ from rest_framework_simplejwt.views import (
     TokenBlacklistView
 )
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
 urlpatterns = [
     path(
         "admin/password_reset/",
@@ -70,4 +75,5 @@ urlpatterns = [
     path('crm/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('crm/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('crm/token/black_list/', TokenBlacklistView.as_view(), name='token_black_list'),
+    path('sentry-debug/', trigger_error),
 ]

@@ -27,7 +27,7 @@ class EventAdmin(admin.ModelAdmin):
 
     def has_change_permission(self, request, obj=None):
         if obj is not None:
-            if request.user != obj.support_user:
+            if request.user != obj.support_user and request.user != obj.contract.sales_contact:
                 return False
         return request.user.has_perm('crm.change_event')
 
