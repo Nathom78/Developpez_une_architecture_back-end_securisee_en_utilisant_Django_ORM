@@ -14,8 +14,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 # from swagger.views import (
@@ -31,12 +32,27 @@ from rest_framework_simplejwt.views import (
     TokenBlacklistView
 )
 
+from rest_framework import routers
+
+from crm.views import (
+    ContractViewSet,
+    ClientViewSet,
+    EventViewSet
+)
+
 
 def trigger_error(request):
     division_by_zero = 1 / 0
 
 
+router = routers.SimpleRouter()
+router.register(_('contract'), ContractViewSet, basename='contract')
+router.register(_('client'), ClientViewSet, basename='client')
+router.register(_('event'), EventViewSet, basename='event')
+
+
 urlpatterns = [
+    path('crm/', include(router.urls)),
     path(
         "admin/password_reset/",
         auth_views.PasswordResetView.as_view(),
@@ -63,14 +79,13 @@ urlpatterns = [
     # Optional UI:
     path('crm/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('crm/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    # EndPoints for Login and SignUp
-    path('login', TokenObtainPairView.as_view(), name='login'),
     # # simplejwt urls and views for the Swagger
     # path('crm/token/', DecoratedTokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('crm/token/refresh/', DecoratedTokenRefreshView.as_view(), name='token_refresh'),
     # path('crm/token/verify/', DecoratedTokenVerifyView.as_view(), name='token_verify'),
     # path('crm/token/black_list/', DecoratedTokenBlacklistView.as_view(), name='token_black_list'),
     # simplejwt urls and views for the Swagger
+    path('crm/login/', TokenObtainPairView.as_view(), name='login'),
     path('crm/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('crm/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('crm/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
