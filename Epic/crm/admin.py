@@ -9,7 +9,7 @@ from crm.models import (
 
 class ClientAdmin(admin.ModelAdmin):
     list_display = ["__str__", "company_name", "existing"]
-    search_fields = ["last_name"]
+    search_fields = ["^last_name"]
     ordering = ["last_name"]
 
     def has_change_permission(self, request, obj=None):
@@ -22,7 +22,7 @@ class ClientAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     list_display = ["__str__", "event_status", "contract"]
     ordering = ["event_date"]
-    search_fields = ["client__last_name", "client__company_name"]
+    search_fields = ["^client__last_name", "^client__company_name", "^support_user__username"]
     empty_value_display = ""
 
     def has_change_permission(self, request, obj=None):
@@ -40,7 +40,7 @@ class EventInline(admin.StackedInline):
 class ContractAdmin(admin.ModelAdmin):
     list_display = ["__str__", "client", "status"]
     ordering = ["client"]
-    search_fields = ["client__last_name", "client__company_name"]
+    search_fields = ["^client__last_name", "^client__company_name"]
     inlines = [EventInline, ]
 
     def has_change_permission(self, request, obj=None):

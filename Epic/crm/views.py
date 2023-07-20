@@ -31,18 +31,10 @@ class ContractViewSet(mixins.CreateModelMixin,
     serializer_class = ContractSerializer
     list_serializer_class = ContractListSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['client.company_name', 'client.last_name', 'email', 'date_created']
-    ordering_fields = ['client.company_name']
+    search_fields = ['^client__company_name', '^client__last_name', '^email', 'date_created']
+    # ordering_fields = ['client.company_name']
     queryset = Contract.objects.all()
     permission_classes = [IsContactOrAuthenticated]
-
-    # def get_queryset(self):
-    #     queryset = self.queryset
-    #     if not self.request.user.is_anonymous:
-    #         queryset = Contract.objects.all()
-    #     # if self.request.user.role == 'administrator':
-    #     #     queryset = Contract.objects.all()
-    #     return queryset
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -64,18 +56,10 @@ class ClientViewSet(mixins.CreateModelMixin,
     serializer_class = ClientSerializer
     list_serializer_class = ClientListSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['client.company_name', 'client.last_name', 'email', 'date_created']
-    ordering_fields = ['client.company_name']
+    search_fields = ['^client__company_name', '^client__last_name', '^email', 'date_created']
+    # ordering_fields = ['client.company_name']
     queryset = Client.objects.all()
     permission_classes = [IsContactOrAuthenticated]
-
-    # def get_queryset(self):
-    #     queryset = self.queryset
-    #     if not self.request.user.is_anonymous:
-    #         queryset = Contract.objects.all()
-    #     # if self.request.user.role == 'administrator':
-    #     #     queryset = Contract.objects.all()
-    #     return queryset
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -104,19 +88,12 @@ class EventViewSet(mixins.CreateModelMixin,
     """
     serializer_class = EventSerializer
     list_serializer_class = EventListSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['client.company_name', 'client.last_name', 'email', 'date_created', 'contract', 'event_status']
-    ordering_fields = ['client.company_name']
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ['^client__company_name', '^client__last_name', 'date_created', 'contract__sales_contact__username',
+                     'event_status', '^support_user__username'
+                     ]
     queryset = Event.objects.all()
     permission_classes = [IsContactOrAuthenticated]
-
-    # def get_queryset(self):
-    #     queryset = self.queryset
-    #     if not self.request.user.is_anonymous:
-    #         queryset = Contract.objects.all()
-    #     # if self.request.user.role == 'administrator':
-    #     #     queryset = Contract.objects.all()
-    #     return queryset
 
     def get_serializer_class(self):
         if self.action == "list":
