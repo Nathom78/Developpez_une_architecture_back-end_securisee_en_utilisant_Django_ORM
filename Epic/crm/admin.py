@@ -14,7 +14,7 @@ class ClientAdmin(admin.ModelAdmin):
 
     def has_change_permission(self, request, obj=None):
         if obj is not None:
-            if request.user != obj.sales_contact:
+            if request.user != obj.sales_contact and request.user.groups.all()[0].name != 'administrator':
                 return False
         return request.user.has_perm('crm.change_client')
 
@@ -22,12 +22,14 @@ class ClientAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     list_display = ["__str__", "event_status", "contract"]
     ordering = ["event_date"]
-    search_fields = ["^client__last_name", "^client__company_name", "^support_user__username"]
+    search_fields = ["^client__last_name", "^client__company_name", "^support_user__username", "contract_id"]
     empty_value_display = ""
 
     def has_change_permission(self, request, obj=None):
+        print(request.user.groups.all()[0].name)
         if obj is not None:
-            if request.user != obj.support_user and request.user != obj.contract.sales_contact:
+            if request.user != obj.support_user and request.user != obj.contract.sales_contact \
+                    and request.user.groups.all()[0].name != 'administrator':
                 return False
         return request.user.has_perm('crm.change_event')
 
@@ -45,7 +47,7 @@ class ContractAdmin(admin.ModelAdmin):
 
     def has_change_permission(self, request, obj=None):
         if obj is not None:
-            if request.user != obj.sales_contact:
+            if request.user != obj.sales_contact and request.user.groups.all()[0].name != 'administrator':
                 return False
         return request.user.has_perm('crm.change_contract')
 

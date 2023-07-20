@@ -90,7 +90,7 @@ class EventViewSet(mixins.CreateModelMixin,
     list_serializer_class = EventListSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ['^client__company_name', '^client__last_name', 'date_created', 'contract__sales_contact__username',
-                     'event_status', '^support_user__username'
+                     'event_status', '^support_user__username', 'contract__id'
                      ]
     queryset = Event.objects.all()
     permission_classes = [IsContactOrAuthenticated]
