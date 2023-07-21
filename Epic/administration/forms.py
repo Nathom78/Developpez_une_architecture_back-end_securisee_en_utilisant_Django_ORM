@@ -28,6 +28,9 @@ class UserCreationForm(forms.ModelForm):
         fields = ('username', 'email', 'role')
 
     def clean_username(self):
+        """
+        :return: capitalize the username if not exist
+        """
         username = self.cleaned_data.get('username')
         if get_user_model().objects.filter(username__iexact=username) \
                 .exclude(pk=self.instance.pk).exists():
@@ -35,6 +38,10 @@ class UserCreationForm(forms.ModelForm):
         return username.capitalize()
 
     def clean_email(self):
+        """
+        email validator with unique,blank, and null = True
+        :return: email if not unique
+        """
         email = self.cleaned_data.get('email')
         if email is not None:
             if get_user_model().objects.filter(email__iexact=email) \
@@ -74,12 +81,16 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    """A form for updating users. Includes all the fields on
-    the user, but replaces the password field disabled password hash display field.
+    """
+    A form for updating users.
+    Includes all the fields on the user, but replaces the password field disabled password hash display field.
     """
     password = ReadOnlyPasswordHashField()
 
     def clean_username(self):
+        """
+        :return: capitalize the username if not exist
+        """
         username = self.cleaned_data.get('username')
         if get_user_model().objects.filter(username__iexact=username) \
                 .exclude(pk=self.instance.pk).exists():
@@ -87,6 +98,10 @@ class UserChangeForm(forms.ModelForm):
         return username.capitalize()
 
     def clean_email(self):
+        """
+        email validator with unique,blank, and null = True
+        :return: email if not unique
+        """
         email = self.cleaned_data.get('email')
         if email is not None:
             if get_user_model().objects.filter(email__iexact=email) \

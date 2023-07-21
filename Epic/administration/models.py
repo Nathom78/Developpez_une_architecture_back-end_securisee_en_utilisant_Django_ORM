@@ -9,12 +9,17 @@ import uuid
 
 class MyCustomManager(BaseUserManager):
     def get_by_natural_key(self, username):
+        """
+        :param username:
+        :return: username insensitive but with Capitalize cleaned
+        """
         case_insensitive_username_field = '{}__iexact'.format(self.model.USERNAME_FIELD)
         return self.get(**{case_insensitive_username_field: username})
 
     def create_user(self, username, role, email, password=None, **extra_fields):
         """
-        Creates and saves a User with a UserName, role(by default SUBSCRIBER), email(not obligatory) and a password.
+        Creates and saves a User with a userName, role (obligatory, and no default), email(not obligatory) and a
+        password.
         """
 
         if not username:
