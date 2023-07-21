@@ -97,5 +97,3 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = MyUser
         fields = ('username', 'role', 'email', 'password', 'is_active')
-
-print()

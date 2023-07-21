@@ -19,12 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-# from swagger.views import (
-#     DecoratedTokenVerifyView,
-#     DecoratedTokenRefreshView,
-#     DecoratedTokenObtainPairView,
-#     DecoratedTokenBlacklistView
-# )
+
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -79,11 +74,6 @@ urlpatterns = [
     # Optional UI:
     path('crm/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('crm/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    # # simplejwt urls and views for the Swagger
-    # path('crm/token/', DecoratedTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('crm/token/refresh/', DecoratedTokenRefreshView.as_view(), name='token_refresh'),
-    # path('crm/token/verify/', DecoratedTokenVerifyView.as_view(), name='token_verify'),
-    # path('crm/token/black_list/', DecoratedTokenBlacklistView.as_view(), name='token_black_list'),
     # simplejwt urls and views for the Swagger
     path('crm/login/', TokenObtainPairView.as_view(), name='login'),
     path('crm/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

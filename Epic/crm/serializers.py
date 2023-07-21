@@ -15,7 +15,6 @@ class ContractListSerializer(serializers.ModelSerializer):
     client = serializers.StringRelatedField()
     sales_contact = serializers.StringRelatedField()
     id = serializers.HyperlinkedRelatedField(
-        # many=True,
         read_only=True,
         view_name='contract-detail'
     )
@@ -46,7 +45,6 @@ class ClientListSerializer(serializers.ModelSerializer):
     """
     sales_contact = serializers.StringRelatedField()
     id = serializers.HyperlinkedRelatedField(
-        # many=True,
         read_only=True,
         view_name='client-detail'
     )
@@ -78,7 +76,6 @@ class EventListSerializer(serializers.ModelSerializer):
     client = serializers.StringRelatedField()
     support_user = serializers.StringRelatedField()
     id = serializers.HyperlinkedRelatedField(
-        # many=True,
         read_only=True,
         view_name='event-detail'
     )

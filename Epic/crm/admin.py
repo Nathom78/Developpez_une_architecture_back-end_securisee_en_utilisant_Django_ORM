@@ -51,9 +51,6 @@ class ContractAdmin(admin.ModelAdmin):
         return request.user.has_perm('crm.change_contract')
 
 
-# class ProjectsAdmin(admin.ModelAdmin):
-#     readonly_fields = ('id',)
-
 # And all models for personalized
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Event, EventAdmin)
