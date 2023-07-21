@@ -36,9 +36,10 @@ class UserCreationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if get_user_model().objects.filter(email__iexact=email) \
-                .exclude(pk=self.instance.pk).exists():
-            raise forms.ValidationError(_(u'The email ‘{}’ is already in use.'.format(email)))
+        if email is not None:
+            if get_user_model().objects.filter(email__iexact=email) \
+                    .exclude(pk=self.instance.pk).exists():
+                raise forms.ValidationError(_(u'The email ‘{}’ is already in use.'.format(email)))
         return email
 
     def clean_password2(self):
@@ -87,11 +88,14 @@ class UserChangeForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if get_user_model().objects.filter(email__iexact=email) \
-                .exclude(pk=self.instance.pk).exists():
-            raise forms.ValidationError(_(u'The email ‘{}’ is already in use.'.format(email)))
+        if email is not None:
+            if get_user_model().objects.filter(email__iexact=email) \
+                    .exclude(pk=self.instance.pk).exists():
+                raise forms.ValidationError(_(u'The email ‘{}’ is already in use.'.format(email)))
         return email
 
     class Meta:
         model = MyUser
         fields = ('username', 'role', 'email', 'password', 'is_active')
+
+print()

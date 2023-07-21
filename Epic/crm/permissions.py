@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class IsContactOrAuthenticated(BasePermission):
-    message = _('User is not the team contact or not authenticated ')
+    message = _('User is not the team contact or not authenticated.')
 
     def has_permission(self, request, view):
         """
