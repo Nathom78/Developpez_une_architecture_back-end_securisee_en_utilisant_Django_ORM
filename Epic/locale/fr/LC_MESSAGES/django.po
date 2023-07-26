@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 13:55+0200\n"
+"POT-Creation-Date: 2023-07-26 21:21+0200\n"
 "PO-Revision-Date: 2023-07-13 19:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,179 +18,188 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: .\Epic\urls.py:49 .\crm\models.py:67
+#: .\Epic\Epic\urls.py:44 .\Epic\crm\models.py:78
 msgid "contract"
 msgstr "contrat"
 
-#: .\Epic\urls.py:50 .\crm\models.py:43 .\crm\models.py:69
+#: .\Epic\Epic\urls.py:45 .\Epic\crm\models.py:41 .\Epic\crm\models.py:100
 msgid "client"
 msgstr "client"
 
-#: .\Epic\urls.py:51
+#: .\Epic\Epic\urls.py:46
 #, fuzzy
 #| msgid "Event"
 msgid "event"
 msgstr "Evénement"
 
-#: .\administration\admin.py:43
+#: .\Epic\administration\admin.py:43
 msgid "Personal info"
 msgstr "Information personnelle"
 
-#: .\administration\admin.py:44
+#: .\Epic\administration\admin.py:44
 msgid "Permissions"
 msgstr "Permissions"
 
-#: .\administration\forms.py:16
+#: .\Epic\administration\forms.py:16
 msgid "Password"
 msgstr "Mot de passe"
 
-#: .\administration\forms.py:21
+#: .\Epic\administration\forms.py:21
 msgid "Password confirmation"
 msgstr "Confirmation du mot de passe"
 
-#: .\administration\forms.py:23
+#: .\Epic\administration\forms.py:23
 msgid "Enter the same password as before, for verification."
 msgstr "Entrez le même mot de passe que précédemment, pour vérification."
 
-#: .\administration\forms.py:34 .\administration\forms.py:85
+#: .\Epic\administration\forms.py:37 .\Epic\administration\forms.py:97
 msgid "The username ‘{}’ is already in use."
 msgstr "Le nom d'utilisateur ‘{}’ est déjà utilisé."
 
-#: .\administration\forms.py:41 .\administration\forms.py:92
+#: .\Epic\administration\forms.py:49 .\Epic\administration\forms.py:109
 msgid "The email ‘{}’ is already in use."
 msgstr "L'email ‘{}’ est déjà utilisé."
 
-#: .\administration\forms.py:49
+#: .\Epic\administration\forms.py:57
 msgid "Passwords don't match"
 msgstr "Les mots de passe ne correspondent pas"
 
-#: .\administration\models.py:21
+#: .\Epic\administration\models.py:26
 msgid "Users must have an username"
 msgstr "Les utilisateurs doivent avoir un nom d'utilisateur"
 
-#: .\administration\models.py:55
+#: .\Epic\administration\models.py:60
 msgid "administrator"
 msgstr "gestionnaire"
 
-#: .\administration\models.py:56
+#: .\Epic\administration\models.py:61
 msgid "commercial"
 msgstr "commercial"
 
-#: .\administration\models.py:57
+#: .\Epic\administration\models.py:62
 msgid "support"
 msgstr "support"
 
-#: .\administration\models.py:61
+#: .\Epic\administration\models.py:66
 msgid "username"
 msgstr "nom d'utilisateur"
 
-#: .\administration\models.py:63 .\crm\models.py:18
+#: .\Epic\administration\models.py:68 .\Epic\crm\models.py:14
 msgid "email address"
 msgstr "adresse e-mail"
 
-#: .\administration\models.py:65
+#: .\Epic\administration\models.py:70
 msgid "team"
 msgstr "équipe"
 
-#: .\administration\validators.py:9
+#: .\Epic\administration\validators.py:9
 msgid "Password must contain a letter."
 msgstr "Le mot de passe doit contenir une lettre."
 
-#: .\administration\validators.py:13
+#: .\Epic\administration\validators.py:13
 msgid "Your password must contain at least one letter."
 msgstr "Votre mot de passe doit contenir au moins une lettre."
 
-#: .\administration\validators.py:20
+#: .\Epic\administration\validators.py:20
 msgid "The password must contain a number"
 msgstr "Le mot de passe doit contenir un chiffre"
 
-#: .\administration\validators.py:25
+#: .\Epic\administration\validators.py:25
 msgid "Your password must contain at least one number."
 msgstr "Votre mot de passe doit contenir au moins un chiffre."
 
-#: .\crm\models.py:16
+#: .\Epic\crm\models.py:12
 msgid "first name"
 msgstr "prénom"
 
-#: .\crm\models.py:17
+#: .\Epic\crm\models.py:13
 msgid "last name"
 msgstr "nom"
 
-#: .\crm\models.py:19
+#: .\Epic\crm\models.py:15
 msgid "office phone"
 msgstr "téléphone du bureau"
 
-#: .\crm\models.py:20
+#: .\Epic\crm\models.py:16
 msgid "mobile"
 msgstr "mobile"
 
-#: .\crm\models.py:21
+#: .\Epic\crm\models.py:17
 msgid "company name"
 msgstr "nom de l’entreprise"
 
-#: .\crm\models.py:22 .\crm\models.py:46 .\crm\models.py:74
-msgid "date created"
-msgstr "date de création"
-
-#: .\crm\models.py:23 .\crm\models.py:47 .\crm\models.py:75
-msgid "date updated"
-msgstr "date de mise à jour"
-
-#: .\crm\models.py:24 .\crm\models.py:41
+#: .\Epic\crm\models.py:18 .\Epic\crm\models.py:66
 msgid "sales contact"
 msgstr "commercial"
 
-#: .\crm\models.py:27
+#: .\Epic\crm\models.py:21
 msgid "existing"
 msgstr "existant"
 
-#: .\crm\models.py:28 .\crm\models.py:72
+#: .\Epic\crm\models.py:22 .\Epic\crm\models.py:82
 msgid "note"
 msgstr "note"
 
-#: .\crm\models.py:42 .\crm\models.py:68
+#: .\Epic\crm\models.py:23 .\Epic\crm\models.py:44 .\Epic\crm\models.py:84
+msgid "date created"
+msgstr "date de création"
+
+#: .\Epic\crm\models.py:24 .\Epic\crm\models.py:45 .\Epic\crm\models.py:85
+msgid "date updated"
+msgstr "date de mise à jour"
+
+#: .\Epic\crm\models.py:39 .\Epic\crm\models.py:79
 msgid "status"
 msgstr "statut"
 
-#: .\crm\models.py:44
+#: .\Epic\crm\models.py:42
 msgid "amount"
 msgstr "montant"
 
-#: .\crm\models.py:45
+#: .\Epic\crm\models.py:43
 msgid "payment due"
 msgstr "montant dû"
 
-#: .\crm\models.py:57
+#: .\Epic\crm\models.py:57 .\Epic\crm\serializers.py:142
 msgid "Contract"
 msgstr "Contrat"
 
-#: .\crm\models.py:58 .\crm\models.py:84
+#: .\Epic\crm\models.py:58 .\Epic\crm\models.py:95
+#: .\Epic\crm\serializers.py:143
 msgid "of"
 msgstr "du"
 
-#: .\crm\models.py:66
+#: .\Epic\crm\models.py:77
 msgid "support contact"
 msgstr "support"
 
-#: .\crm\models.py:70
+#: .\Epic\crm\models.py:80
 msgid "attendees"
 msgstr "participant"
 
-#: .\crm\models.py:71
+#: .\Epic\crm\models.py:81
 msgid "location"
 msgstr "lieu"
 
-#: .\crm\models.py:73
+#: .\Epic\crm\models.py:83
 msgid "event date"
 msgstr "date de l'événement"
 
-#: .\crm\models.py:83
+#: .\Epic\crm\models.py:94
 msgid "Event"
 msgstr "Evénement"
 
-#: .\crm\permissions.py:7
+#: .\Epic\crm\permissions.py:7
 msgid "User is not the team contact or not authenticated."
 msgstr "L'utilisateur n'est pas connecté ou n'ai pas le contact designé."
+
+#: .\Epic\crm\serializers.py:73
+msgid "There can only be one contract per client and per day."
+msgstr "Il peut y avoir seulement un contrat pour un client par jour"
+
+#: .\Epic\crm\serializers.py:167
+msgid "Date mustn't in the past"
+msgstr "La date ne doit pas être dans le passé"
 
 #~ msgid "on"
 #~ msgstr "du"

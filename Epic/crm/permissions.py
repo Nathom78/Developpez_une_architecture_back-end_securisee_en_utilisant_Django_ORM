@@ -19,9 +19,11 @@ class IsContactOrAuthenticated(BasePermission):
         for other need to be the contact team for editing.
         """
         if view.__class__.__name__ == "EventViewSet":
-            if request.user == obj.contract.sales_contact:
+            if request.user == obj.contract.client.sales_contact:
                 return True
             contact = obj.support_user
+        elif view.__class__.__name__ == "ContractViewSet":
+            contact = obj.client.sales_contact
         else:
             contact = obj.sales_contact
         return bool(request.method == 'GET' or request.user == contact or request.user.role == 'administrator')
