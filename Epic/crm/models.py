@@ -51,7 +51,6 @@ class Contract(models.Model):
             self.status = True if nb_truth > 0 else False
         super().save(*args, **kwargs)
 
-# ne sert à rien mettre direct dans __str__
     @property
     def contract_name(self):
         name = gettext("Contract")

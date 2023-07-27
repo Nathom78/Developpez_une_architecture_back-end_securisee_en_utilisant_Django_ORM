@@ -13,68 +13,6 @@ from crm.models import (
 from django.contrib.auth import get_user_model
 
 
-class ContractListSerializer(serializers.ModelSerializer):
-    """
-    The contract List Serializer.
-    Client and sale_contact is represented by the __str__ function.
-    """
-    client = serializers.StringRelatedField()
-    sales_contact = serializers.StringRelatedField()
-    id = serializers.HyperlinkedRelatedField(
-        read_only=True,
-        view_name='contract-detail'
-    )
-
-    class Meta:
-        model = Contract
-        fields = ["sales_contact", "status", "client", 'id']
-
-
-class ContractSerializer(serializers.ModelSerializer):
-    """
-    The contract serializer for retrieving or editing.
-    Client and sale_contact is represented by the __str__ function.
-    """
-
-    sales_contact = serializers.StringRelatedField()
-    date_created = serializers.DateField(default=serializers.CreateOnlyDefault(timezone.now().date()))
-
-    def to_internal_value(self, data):
-        print(data['client'])
-        try:
-            client_full_name = data['client']
-            client_complex = client_full_name.split()
-            print(client_complex)
-            client_first_name = client_complex[0]
-            client_last_name = client_complex[1]
-            client = Client.objects.get(
-                Q(first_name=client_first_name) &
-                Q(last_name=client_last_name)
-            )
-            data['client'] = client.id
-            print(client.id)
-        finally:
-            return super().to_internal_value(data)
-
-    def to_representation(self, instance):
-        ret = super().to_representation(instance)
-        client = Client.objects.get(pk=ret['client'])
-        ret['client'] = str(client)
-        return ret
-
-    class Meta:
-        model = Contract
-        fields = ["id", "sales_contact", "client", "status", "amount", "payment_due", "date_created", "date_updated"]
-        depth = 0
-        validators = [
-            UniqueTogetherValidator(
-                queryset=Contract.objects.all(),
-                fields=["client", "date_created"],
-                message=_("There can only be one contract per client and per day.")
-            )
-        ]
-
-
 class ClientListSerializer(serializers.ModelSerializer):
     """
     The Client List Serializer.
@@ -83,7 +21,7 @@ class ClientListSerializer(serializers.ModelSerializer):
     sales_contact = serializers.StringRelatedField()
     id = serializers.HyperlinkedRelatedField(
         read_only=True,
-        view_name='client-detail'
+        view_name="client-detail"
     )
 
     class Meta:
@@ -101,12 +39,72 @@ class ClientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Client
-        fields = '__all__'
+        fields = "__all__"
         depth = 0
         validators = [
             UniqueTogetherValidator(
                 queryset=Client.objects.all(),
                 fields=["first_name", "last_name", "company_name"]
+            )
+        ]
+
+
+class ContractListSerializer(serializers.ModelSerializer):
+    """
+    The contract List Serializer.
+    Client and sale_contact is represented by the __str__ function.
+    """
+    client = serializers.StringRelatedField()
+    sales_contact = serializers.StringRelatedField()
+    id = serializers.HyperlinkedRelatedField(
+        read_only=True,
+        view_name='contract-detail'
+    )
+
+    class Meta:
+        model = Contract
+        fields = ["contract_name", "sales_contact", "status", "client", 'id']
+
+
+class ContractSerializer(serializers.ModelSerializer):
+    """
+    The contract serializer for retrieving or editing.
+    Client and sale_contact is represented by the __str__ function.
+    """
+
+    sales_contact = serializers.StringRelatedField()
+    date_created = serializers.DateField(default=serializers.CreateOnlyDefault(timezone.now().date()))
+
+    def to_internal_value(self, data):
+        try:
+            client_full_name = data["client"]
+            client_complex = client_full_name.split()
+            client_first_name = client_complex[0]
+            client_last_name = client_complex[1]
+            client = Client.objects.get(
+                Q(first_name=client_first_name) &
+                Q(last_name=client_last_name)
+            )
+            data['client'] = client.id
+        finally:
+            return super().to_internal_value(data)
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        client = Client.objects.get(pk=ret['client'])
+        ret['client'] = str(client)
+        return ret
+
+    class Meta:
+        model = Contract
+        fields = ["id", "contract_name", "sales_contact", "client", "status", "amount", "payment_due",
+                  "date_created", "date_updated"]
+        read_only_fields = ["contract_name"]
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Contract.objects.all(),
+                fields=["client", "date_created"],
+                message=_("There can only be one contract per client and per day.")
             )
         ]
 
@@ -142,7 +140,7 @@ class EventSerializer(serializers.ModelSerializer):
         name = gettext("Contract")
         on = gettext("of")
         try:
-            contract_name = data['contract']
+            contract_name = data["contract"]
             client_complex = contract_name.split(f"{name}: ")
             client_inlist = client_complex[1].split(f" {on} ")
             client_first_name = client_inlist[0].split()[0]
@@ -152,19 +150,20 @@ class EventSerializer(serializers.ModelSerializer):
                 Q(client__last_name=client_last_name) &
                 Q(date_created=client_inlist[1])
             )
-            data['contract'] = contract.id
+            data["contract"] = contract.id
         finally:
             return super().to_internal_value(data)
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
         contract = Contract.objects.get(pk=ret['contract'])
-        ret['contract'] = str(contract)
+        ret["contract"] = str(contract)
         return ret
 
     def validate(self, data):
-        if data['event_date'] < timezone.now().date():
-            raise serializers.ValidationError({"Event": _("Date mustn't in the past")})
+        if "event_date" in data:
+            if data["event_date"] < timezone.now().date():
+                raise serializers.ValidationError({"Event": _("Date mustn't in the past")})
         return data
 
     class Meta:
