@@ -39,7 +39,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'role', 'email', 'is_staff', 'group', 'is_superuser')
     list_filter = ('role',)
     fieldsets = (
-        (None, {'fields': ('username', 'password', 'role')}),
+        (None, {'fields': ('id', 'username', 'password', 'role')}),
         (_('Personal info'), {'fields': ('email',)}),
         (_('Permissions'), {'fields': ('is_active', 'is_superuser', 'permissions'), 'classes': ('collapse',)})
     )
@@ -58,4 +58,3 @@ class UserAdmin(BaseUserAdmin):
 
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
-

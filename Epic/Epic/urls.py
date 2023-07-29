@@ -35,16 +35,10 @@ from crm.views import (
     EventViewSet
 )
 
-
-def trigger_error(request):
-    division_by_zero = 1 / 0
-
-
 router = routers.SimpleRouter()
 router.register(_('contract'), ContractViewSet, basename='contract')
 router.register(_('client'), ClientViewSet, basename='client')
 router.register(_('event'), EventViewSet, basename='event')
-
 
 urlpatterns = [
     path('crm/', include(router.urls)),
@@ -76,9 +70,7 @@ urlpatterns = [
     path('crm/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     # simplejwt urls and views for the Swagger
     path('crm/login/', TokenObtainPairView.as_view(), name='login'),
-    path('crm/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('crm/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('crm/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('crm/token/black_list/', TokenBlacklistView.as_view(), name='token_black_list'),
-    path('sentry-debug/', trigger_error),
 ]

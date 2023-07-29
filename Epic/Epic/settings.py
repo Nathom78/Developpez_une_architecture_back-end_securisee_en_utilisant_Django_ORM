@@ -152,14 +152,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    # 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
-
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    # ]
+    )
 }
 
 SIMPLE_JWT = {
@@ -175,21 +168,19 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
-# sentry_sdk.init(
-#     # dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
-#     dsn="https://1d25966b8db34f9badcc76237a3a52c9@o4505539706814464.ingest.sentry.io/4505539709435904",
-#
-#     # Set traces_sample_rate to 1.0 to capture 100%
-#     # of transactions for performance monitoring.
-#     # We recommend adjusting this value in production,
-#     traces_sample_rate=1.0,
-#     integrations=[
-#         DjangoIntegration(
-#             transaction_style='url',
-#             middleware_spans=True,
-#             signals_spans=False,
-#             cache_spans=False,
-#         ),
-#     ],
-#     send_default_pii=True
-# )
+sentry_sdk.init(
+    dsn="https://1d25966b8db34f9badcc76237a3a52c9@o4505539706814464.ingest.sentry.io/4505539709435904",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production,
+    traces_sample_rate=1.0,
+    integrations=[
+        DjangoIntegration(
+            transaction_style='url',
+            middleware_spans=True,
+            signals_spans=False,
+            cache_spans=False,
+        ),
+    ],
+    send_default_pii=True
+)
