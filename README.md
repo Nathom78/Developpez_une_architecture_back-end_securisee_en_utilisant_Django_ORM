@@ -158,6 +158,6 @@ https://documenter.getpostman.com/view/21242674/2s9XxsVc52
 <a href="https://peps.python.org/pep-0008/">ici</a>.
 </p>
 
-Un rapport **flake8** au format HTML est disponible dans le repertoire `\flake-report`, à la racine du projet.
+Un rapport **flake8** au format HTML est disponible dans le repertoire `\reports\flake8`, à la racine du projet.
 
 
