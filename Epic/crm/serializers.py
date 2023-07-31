@@ -19,10 +19,6 @@ class ClientListSerializer(serializers.ModelSerializer):
     Sale_contact is represented by the __str__ function.
     """
     sales_contact = serializers.StringRelatedField()
-    id = serializers.HyperlinkedRelatedField(
-        read_only=True,
-        view_name="client-detail"
-    )
 
     class Meta:
         model = Client
@@ -56,10 +52,6 @@ class ContractListSerializer(serializers.ModelSerializer):
     """
     client = serializers.StringRelatedField()
     sales_contact = serializers.StringRelatedField()
-    id = serializers.HyperlinkedRelatedField(
-        read_only=True,
-        view_name='contract-detail'
-    )
 
     class Meta:
         model = Contract
@@ -117,10 +109,6 @@ class EventListSerializer(serializers.ModelSerializer):
     contract = serializers.SlugRelatedField(slug_field="contract_name", read_only=True)
     client = serializers.StringRelatedField()
     support_user = serializers.StringRelatedField()
-    id = serializers.HyperlinkedRelatedField(
-        read_only=True,
-        view_name='event-detail'
-    )
 
     class Meta:
         model = Event

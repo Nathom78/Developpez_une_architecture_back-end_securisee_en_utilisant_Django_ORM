@@ -1,6 +1,7 @@
 # views CRM
 from django.utils.translation import gettext_lazy as _
-from rest_framework import viewsets, mixins, filters
+from rest_framework import filters
+from rest_framework.viewsets import ModelViewSet
 from crm.permissions import IsContactOrAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -17,16 +18,10 @@ from crm.serializers import (
 from crm.models import Contract, Client, Event
 
 
-class ClientViewSet(mixins.CreateModelMixin,
-                    mixins.ListModelMixin,
-                    mixins.RetrieveModelMixin,
-                    mixins.UpdateModelMixin,
-                    viewsets.GenericViewSet
-                    ):
+class ClientViewSet(ModelViewSet):
     """
     API endpoint that allows Client to be listed by user authenticated
-    and where user is attached, to be viewed, edited, or created a new
-    one.
+    and where user is attached, can make all actions.
     """
     serializer_class = ClientSerializer
     list_serializer_class = ClientListSerializer
@@ -50,16 +45,10 @@ class ClientViewSet(mixins.CreateModelMixin,
         return Response(message)
 
 
-class ContractViewSet(mixins.CreateModelMixin,
-                      mixins.ListModelMixin,
-                      mixins.RetrieveModelMixin,
-                      mixins.UpdateModelMixin,
-                      viewsets.GenericViewSet
-                      ):
+class ContractViewSet(ModelViewSet):
     """
     API endpoint that allows contract to be listed by user authenticated
-    and where user is attached, to be viewed, edited, or created a new
-    one.
+    and where user is attached, can make all actions.
     """
     serializer_class = ContractSerializer
     list_serializer_class = ContractListSerializer
@@ -77,16 +66,10 @@ class ContractViewSet(mixins.CreateModelMixin,
         return super().get_serializer_class()
 
 
-class EventViewSet(mixins.CreateModelMixin,
-                   mixins.ListModelMixin,
-                   mixins.RetrieveModelMixin,
-                   mixins.UpdateModelMixin,
-                   viewsets.GenericViewSet
-                   ):
+class EventViewSet(ModelViewSet):
     """
     API endpoint that allows Event to be listed by user authenticated
-    and where user is attached, to be viewed, edited, or created a new
-    one.
+    and where user is attached, can make all actions.
     """
     serializer_class = EventSerializer
     list_serializer_class = EventListSerializer

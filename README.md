@@ -144,10 +144,17 @@ This exposes 3 endpoints:
 
 ## *7. Documentation Postman publique*
 https://documenter.getpostman.com/view/21242674/2s9XxsVc52
+
+## *8. Journalisation avec Sentry*
+Dans le fichier settings.py situé dans le répertoire Epic, se trouve la configuration pour sentry,
+vous devez vous créer un compte sur https://sentry.io/signup/,
+et remplacer la ligne :  `dsn="https://exemple.ingest.sentry.io/bidulechouette"`, 
+par la vôtre, afin que toute la journalisation du logiciel, soit dans votre compte.
+
 ***
 # Technologies
 <p>
-<img src="https://skillicons.dev/icons?i=git,github,python,django,postgresql,postman&theme=dark">
+<img src="https://skillicons.dev/icons?i=git,github,python,django,postgresql,postman,sentry&theme=dark">
 </p>
 
 ![logo](https://www.django-rest-framework.org/img/logo.png)
