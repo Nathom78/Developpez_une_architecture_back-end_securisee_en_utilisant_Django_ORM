@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 Pour vérifier, taper cette commande :
 <pre><code>pip list</code></pre>
-Et vous devriez avoir :
+Et vous devriez avoir (version minimum testé):
 <pre><code>Package                       Version
 ----------------------------- --------
 asgiref                       3.7.2
