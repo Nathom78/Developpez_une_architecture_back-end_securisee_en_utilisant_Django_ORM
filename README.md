@@ -1,4 +1,3 @@
-test ssh
  # Developpez_une_architecture_back-end_securisee_en_utilisant_Django_ORM
 [**Projet 12** du parcours OpenClassrooms Développeur d'application - Python](https://course.oc-static.com/projects/Python+FR/840+D%C3%A9veloppez+une+architecture+back-end+s%C3%A9curis%C3%A9e/Ancienne+Version-De%CC%81veloppez+une+architecture+back-end+se%CC%81curise%CC%81e+en+utilisant+Django+ORM.pdf)
 
